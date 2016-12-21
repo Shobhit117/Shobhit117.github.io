@@ -15,7 +15,7 @@
 		</p>
 		<h2> The Models</h2>
 		<p>
-			Our first model is the VIS+LSTM model introduced in the paper Exploring <a href="https://arxiv.org/abs/1505.02074">Models and Data for Image Question Answering</a>. In this model, the input question is tokenized and it's each word is mapped to a \(300\) length vector using the <a href="http://nlp.stanford.edu/projects/glove/">common crawl glove embeddings</a>. So, each sentence is a sequence of \(300\) length vectors. To make the length of all these sequences equal, we left pad with zero vectors. When Convolutional Neural Networks are trained on object recognition, they develop a representation of the image that makes object information increasingly explicit along the processing hierarchy. Therefore, along the processing hierarchy of the network, the input image is transformed into representations that increasingly care about the actual content of the image compared to it's detailed pixel values. To exploit this fact, the input image is passed through the VGG16 model and the output of it's last layer, a \(4096\) length vector, is taken. This \(4096\) length vector is transformed into a \(300\) length vector using an affine transform (a dense layer with no activation) and then concatenated at the beginning of the question sequence. The resulting sequence is sent to an LSTM model. Our LSTM model consists of an LSTM layer and dense layer with softmax activation. 		
+			Our first model is the VIS+LSTM model introduced in the paper <a href="https://arxiv.org/abs/1505.02074">Exploring Models and Data for Image Question Answering</a>. In this model, the input question is tokenized and it's each word is mapped to a \(300\) length vector using the <a href="http://nlp.stanford.edu/projects/glove/">common crawl glove embeddings</a>. So, each sentence is a sequence of \(300\) length vectors. To make the length of all these sequences equal, we left pad with zero vectors. When Convolutional Neural Networks are trained on object recognition, they develop a representation of the image that makes object information increasingly explicit along the processing hierarchy. Therefore, along the processing hierarchy of the network, the input image is transformed into representations that increasingly care about the actual content of the image compared to it's detailed pixel values. To exploit this fact, the input image is passed through the VGG16 model and the output of it's last layer, a \(4096\) length vector, is taken. This \(4096\) length vector is transformed into a \(300\) length vector using an affine transform (a dense layer with no activation) and then concatenated at the beginning of the question sequence. The resulting sequence is sent to an LSTM model. Our LSTM model consists of an LSTM layer and dense layer with softmax activation. 		
 		</p>
 		<center>
 		<figure>
@@ -32,5 +32,9 @@
 			<figcaption>Fig-2: 2-VIS+LSTM Model</figcaption>
 		</figure>
 		</center>
+		<h2> The LSTM Model</h2>
+		<p>
+			The core of the LSTM model is a memory cell \(c\) encoding at every time-step of what inputs have been observed up to this stage. The behavious of the cell is controlled by gates - layers which are applied multiplicatively and thus can either keep a value from the gated layer if the gate is 1 or 0 this value if the gate is 0. 
+		</p>
 	</body>
 </html>
