@@ -12,9 +12,19 @@
 <h1>Eisenstein's proof of Quadratic Reciprocity</h1>
 <h4><a href="../index.html">Back</a></h4>
 <h2>Introduction</h2>
-The Legendre symbol is a function \(\left(\frac{a}{p}\right)\) which is defined to be equal to \(\pm 1\) depending on wether \(a\) is a quadratic residue modulo \(p\). 
-\[\left(\frac{a}{p}\right) = \begin{cases}0 \quad \text{if }p|a \\ 1 \quad \text{if }a\text{ is a quadratic residue modulo }p \\ -1 \quad \text{if }a\text{ is a quadratic nonresidue modulo }p\end{cases}\]
-If \(p\) and \(q\) are distinct odd primes, then the quadratic reciprocity theorem states that the congruences
+<p>The Legendre symbol is a function \(\left(\frac{a}{p}\right)\) which is defined to be equal to \(\pm 1\) depending on wether \(a\) is a quadratic residue modulo \(p\). 
+\[\left(\frac{a}{p}\right) = \begin{cases}0 \quad \text{if }p|a \\ 1 \quad \text{if }a\text{ is a quadratic residue modulo }p \\ -1 \quad \text{if }a\text{ is a quadratic nonresidue modulo }p\end{cases}\]</p>
+
+We state here two important lemmas about the quadratic residues without proof. 
+
+<p><b>Lemma 1</b> <i>Let \(a\not\equiv 0 \;(\text{mod }p)\). Then \(a\) is a quadratic residue modulo \(p\) iff \(a^{\frac{p-1}{2}}\equiv 1 \; (\text{mod }p)\).</i></p>
+
+<p><b>Lemma 2 (Gauss Lemma)</b> <i>For any odd prime \(p\) let \(a\) be an integer that is coprime to \(p\). Consider the integers \[a,\ 2a,\ 3a,\cdots, \frac{p-1}{2}a\] and their least positive residues modulo \(p\). Let \(n\) be the number of these residues that are greater than \(p/2\). Then \[\left(\frac{a}{p}\right)=(-1)^n\]</i>
+</p>
+
+Following is the formal statement of the quadratic reciprocity law:
+
+<p><b>Theorem (Quadratic Reciprocity Law)</b> If \(p\) and \(q\) are distinct odd primes, then the quadratic reciprocity theorem states that the congruences
 \[
 \begin{align*}
 x^2 \equiv q \quad (\text{mod }p) \\
@@ -22,8 +32,25 @@ x^2 \equiv p \quad (\text{mod }q)
 \end{align*}
 \]
 are both solvable or both unsolvable unless both \(p\) and \(q\) leave the the remainder \(3\) when divided by \(4\). Written symbolically,
-\[\left(\frac{p}{q}\right)\left(\frac{q}{p}\right) = (-1)^{(p-1)(q-1)/4}\] 
+\[\left(\frac{p}{q}\right)\left(\frac{q}{p}\right) = (-1)^{(p-1)(q-1)/4}\] </p>
 
+<h2>The Proof</h2>
+<p>
+Applying Gauss's lemma to \(f(z)=\sin(2\pi z)\) yields
+</p>
+<p><b>Proposition </b> <i>Let \(A = \left\{ \alpha\in \mathbb{Z} | 1\leq \alpha \leq \frac{p-1}{2}\right\}\) be a half system modulo an odd prime \(p\); then $$\begin{equation}\left(\frac{q}{p}\right) = \prod_{\alpha\in A}\frac{\sin\left(\frac{2\pi}{p}q\alpha\right)}{\sin\left(\frac{2\pi}{p}\alpha\right)} \tag{1}\end{equation}$$</i>
+</p>
+<p>
+We start by examining the right hand side of equation \((1)\). The addition theorem for trigonometric functions yields \(\sin 2\alpha = 2\sin\alpha\cos\alpha\) and \(\sin 3\alpha = \sin\alpha(3-4\sin^2\alpha)\). Induction shows that \(\sin q\alpha = \sin\alpha P(\sin\alpha)\) for all odd \(q\geq 1\), where \(P\in \mathbb{Z}[X]\) is a polynomial of degree \(q-1\) and highest coefficient \((-4)^{\frac{q-1}{2}}\). Thus there exist \(a_i \in \mathbb{Z}\) such that \[\begin{align*}\frac{\sin qz}{\sin z} &= (-4)^{\frac{q-1}{2}} \left( (\sin z)^{q-1}+a_{q-2} (\sin z)^{q-2}+\cdots + a_0 \right) \\ &= (-4)^{\frac{q-1}{2}} \psi(X), \quad \text{where }X=\sin z\end{align*}\] Since \(\phi(z)=\frac{\sin qz}{\sin z} \) is an even function, so is \(\psi(X)\), hence \(a_{q-2}=\cdots = a_1 = 0\). Now \(\phi(z)\) has zeros \(\left\{ \pm \frac{2\pi}{q}\beta, \ 1\leq \beta \leq \frac{q-1}{2}\right\}\); actually, we may replace \(\left\{1,\cdots,\frac{q-1}{2} \right\}\) by any half system \(B\) modulo \(q\). Since \(\psi\) is monic of degree \(q-1\), we may write \[\psi(X) = \prod_{\beta\in B}\left(x^2-\sin^2\frac{2\pi\beta}{q} \right)\] Replacing \(X\) by \(\sin z\), we get \[\frac{\sin qz}{\sin z} = (-4)^{\frac{q-1}{2}} \prod_{\beta\in B }\left( \sin^2z -\sin^2\frac{2\pi\beta}{q}\right) \tag{2}\] Put \(z=\frac{2\pi\alpha}{p}\) in equation \((2)\) and plug the result into equation \((1)\).
+\[
+\begin{align*}
+\left(\frac{q}{p}\right) &= \prod_{\alpha\in A} (-4)^{\frac{q-1}{2}} \prod_{\beta\in B} \left( \sin^2\frac{2\pi\alpha}{p} -\sin^2\frac{2\pi\beta}{q}\right)\\
+&= (-4)^{\frac{q-1}{2} \frac{p-1}{2}} \prod_{\alpha\in A}\prod_{\beta\in B} \left( \sin^2\frac{2\pi\alpha}{p} -\sin^2\frac{2\pi\beta}{q}\right)\tag{3}
+\end{align*}
+\]
+Exchanging \(p\) and \(q\) on the right side of \((3)\) give rise to factor of \((-1)^{(p-1)(q-1)/4}\). Therefore,
+\[\left(\frac{q}{p}\right) = (-1)^{(p-1)(q-1)/4}\left(\frac{p}{q}\right) \tag{4}\] which is the quadratic reciprocity law.
+</p>
 </body>
 
 </html>
